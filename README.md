@@ -1,0 +1,2 @@
+# scoreboard
+A basic scoreboard
