@@ -64,16 +64,18 @@ public class ScoreBoardTest {
     void testUpdateGame() {
         try {
             testAddGames();
+            myBoard.updateScore("Liverpool", 0, 1);
+            myBoard.updateScore("Derby", 0, 1);
+            myBoard.updateScore("Barcelona", 0, 1);
+            myBoard.updateScore("Roma", 1, 0);
+            myBoard.updateScore("Dortmund", 1, 0);
+            myBoard.updateScore("Celtic", 1, 0);
+            myBoard.updateScore("Chelsea", 0, 1);
+
         } catch( Exception e) {
             e.printStackTrace();
             Assertions.fail();
         }
-        myBoard.updateScore("Liverpool", 0, 1);
-        myBoard.updateScore("Derby", 0, 1);
-        myBoard.updateScore("Barcelona", 0, 1);
-        myBoard.updateScore("Roma", 1, 0);
-        myBoard.updateScore("Dortmund", 1, 0);
-        myBoard.updateScore("Celtic", 1, 0);
 
         teams.forEach( team -> {
             try {

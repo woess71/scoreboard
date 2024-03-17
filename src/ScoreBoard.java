@@ -33,4 +33,21 @@ public class ScoreBoard {
         return theBoard.size();
     }
 
+    public int getGameScore( String homeTeam) throws Exception {
+        if( theGames.get(homeTeam) == null) {
+            throw new Exception("Error trying to get Game Score. Home Team " + homeTeam + " not found");
+        }
+        BoardItem item = theBoard.get( theGames.get(homeTeam) );
+        return item.getScoreTotal();
+    }
+
+    public synchronized void updateScore( String homeTeam, int homeScore, int awayScore) throws Exception {
+        if( ! theGames.containsKey(homeTeam) ) {
+            throw new Exception("Error updating score. Home Team " + homeTeam + " not found");
+        }
+        Integer counter = theGames.get(homeTeam);
+        BoardItem item = theBoard.get(counter);
+        item.updateScore(homeScore, awayScore);
+    }
+
 }
