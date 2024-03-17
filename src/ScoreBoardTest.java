@@ -62,7 +62,28 @@ public class ScoreBoardTest {
 
     @Test
     void testUpdateGame() {
-        // todo
+        try {
+            testAddGames();
+        } catch( Exception e) {
+            e.printStackTrace();
+            Assertions.fail();
+        }
+        myBoard.updateScore("Liverpool", 0, 1);
+        myBoard.updateScore("Derby", 0, 1);
+        myBoard.updateScore("Barcelona", 0, 1);
+        myBoard.updateScore("Roma", 1, 0);
+        myBoard.updateScore("Dortmund", 1, 0);
+        myBoard.updateScore("Celtic", 1, 0);
+
+        teams.forEach( team -> {
+            try {
+                int score = myBoard.getGameScore(team[0]);
+                Assertions.assertEquals(score, 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Assertions.fail();
+            }
+        });
     }
 
     @Test
