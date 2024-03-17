@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ScoreBoard {
 
@@ -7,8 +10,8 @@ public class ScoreBoard {
     private int gameCount;
 
     public ScoreBoard() {
-        theBoard = new HashMap<Integer, BoardItem>();
-        theGames = new HashMap<String, Integer>();
+        theBoard = new HashMap<>();
+        theGames = new HashMap<>();
 
     }
 
@@ -48,6 +51,40 @@ public class ScoreBoard {
         Integer counter = theGames.get(homeTeam);
         BoardItem item = theBoard.get(counter);
         item.updateScore(homeScore, awayScore);
+    }
+
+    public String getBoardForDisplay() {
+        StringBuilder builder = new StringBuilder();
+        ArrayList<BoardItem> items =  new ArrayList<> (theBoard.values() );
+
+        items.sort(new BoardItemComparator());
+        items.forEach( boardItem ->
+                builder.append(boardItem.getDisplaySummary()).append("\n")
+        );
+        return builder.toString();
+    }
+
+
+    static class BoardItemComparator implements Comparator<BoardItem> {
+
+        // Compares boardItems corresponding to following rule :
+        // Highest total score first
+        // If total score is equal then order the most recent added game first.
+
+        @Override
+        public int compare(BoardItem o1, BoardItem o2) {
+            int currentValue =  Integer.compare(o1.getScoreTotal(), o2.getScoreTotal()) * -1;
+
+            if(currentValue == 0) {
+                if( o1.getGameCounter() > o2.getGameCounter() ) {
+                    return -1;
+                } else if(Objects.equals(o1.getGameCounter(), o2.getGameCounter())) {
+                    return 0;
+                }
+                return 1;
+            }
+            return currentValue;
+        }
     }
 
 }

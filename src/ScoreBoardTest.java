@@ -46,7 +46,6 @@ public class ScoreBoardTest {
             try {
                 myBoard.startMatch(teamPair[0], teamPair[1]);
             } catch (Exception e) {
-                e.printStackTrace();
                 Assertions.fail();
             }
         });
@@ -61,7 +60,6 @@ public class ScoreBoardTest {
             myBoard.finishMatch(teams.getFirst()[0]);
             myBoard.finishMatch(teams.getLast()[0]);
         } catch (Exception e) {
-            e.printStackTrace();
             Assertions.fail();
         }
         Assertions.assertEquals(myBoard.getNumberRunningGames(), 5);
@@ -80,7 +78,6 @@ public class ScoreBoardTest {
             myBoard.updateScore("Chelsea", 0, 1);
 
         } catch( Exception e) {
-            e.printStackTrace();
             Assertions.fail();
         }
 
@@ -89,7 +86,6 @@ public class ScoreBoardTest {
                 int score = myBoard.getGameScore(team[0]);
                 Assertions.assertEquals(score, 1);
             } catch (Exception e) {
-                e.printStackTrace();
                 Assertions.fail();
             }
         });
@@ -114,10 +110,9 @@ public class ScoreBoardTest {
             myBoard.updateScore("Celtic", 3, 0);
             myBoard.updateScore("Roma", 1, 1);
             myBoard.updateScore("Roma", 2, 1);
-            String scoreBoardDisplay =  myBoard.getBoardForDisplay() );
+            String scoreBoardDisplay =  myBoard.getBoardForDisplay();
             Assertions.assertEquals(scoreBoardDisplay, SCOREBOARD_DISPLAY);
         } catch( Exception e) {
-            e.printStackTrace();
             Assertions.fail();
         }
     }
