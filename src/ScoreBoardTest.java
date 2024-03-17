@@ -10,13 +10,13 @@ public class ScoreBoardTest {
     ScoreBoard myBoard;
     ArrayList<String[]> teams;
 
-    final String SCOREBOARD_DISPLAY = "Celtic 3 - Rangers 0" + "\n" +
-            "Roma 2 - Milano 1" + "\n" +
-            "Barcelona 1 - Napoli 2" + "\n" +
-            "Liverpool 2 - Man Utd. 1" + "\n" +
-            "Dortmund 1 - Paris 0" + "\n" +
-            "Derby 0 - Coventry 1" + "\n" +
-            "Chelsea 0 - Villa 0" + "\n";
+    final String SCOREBOARD_DISPLAY = new StringBuilder("Celtic 3 - Rangers 0").append("\n")
+            .append("Roma 2 - Milano 1").append("\n")
+            .append( "Barcelona 1 - Napoli 2").append("\n")
+            .append( "Liverpool 2 - Man Utd. 1").append("\n")
+            .append( "Dortmund 1 - Paris 0").append("\n")
+            .append( "Derby 0 - Coventry 1").append("\n")
+            .append( "Chelsea 0 - Villa 0").append("\n").toString();
 
     @BeforeEach
     void setUp() {
