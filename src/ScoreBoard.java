@@ -30,6 +30,7 @@ public class ScoreBoard {
             throw new Exception("Error trying to finish game. Home Team " + homeTeam + " not found");
         }
         theBoard.remove(theGames.get(homeTeam));
+        theGames.remove(homeTeam);
     }
 
     public int getNumberRunningGames() {
