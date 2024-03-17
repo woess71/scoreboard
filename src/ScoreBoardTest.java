@@ -1,5 +1,8 @@
-import org.junit.Assert;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 
 public class ScoreBoardTest {
@@ -8,19 +11,18 @@ public class ScoreBoardTest {
     ArrayList<String[]> teams;
 
 
-
     @BeforeEach
     void setUp() {
 
         myBoard = new ScoreBoard();
-
+        teams = new ArrayList<>();
         teams.add(new String[]{"Liverpool", "Man Utd."});
         teams.add(new String[]{"Derby", "Coventry"});
-        teams.add(new String[] {"Barcelona", "Napoli"});
-        teams.add(new String[] {"Roma", "Milano"});
-        teams.add(new String[] {"Dortmund", "Paris"});
-        teams.add(new String[] {"Celtic", "Rangers"});
-        teams.add(new String[] {"Chelsea", "Villa"});
+        teams.add(new String[]{"Barcelona", "Napoli"});
+        teams.add(new String[]{"Roma", "Milano"});
+        teams.add(new String[]{"Dortmund", "Paris"});
+        teams.add(new String[]{"Celtic", "Rangers"});
+        teams.add(new String[]{"Chelsea", "Villa"});
 
     }
 
@@ -33,19 +35,29 @@ public class ScoreBoardTest {
 
     @Test
     void testAddGames() {
-
-        teams.forEach( teamPair ->
-                myBoard.startMatch(teamPair[0], teamPair[1])
-        );
-        Assert.assertEquals( myBoard.getRunningGames(), 7 );
+        teams.forEach(teamPair -> {
+            try {
+                myBoard.startMatch(teamPair[0], teamPair[1]);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Assertions.fail();
+            }
+        });
+        Assertions.assertEquals(myBoard.getNumberRunningGames(), 7);
     }
 
 
     @Test
     void testRemoveGame() {
-        myBoard.finishMatch( teams.getFirst()[0] );
-        myBoard.finishMatch( teams.getLast()[0]);
-        Assert.assertEquals(myBoard.getNumberRunningGames(), 5);
+        try {
+            testAddGames();
+            myBoard.finishMatch(teams.getFirst()[0]);
+            myBoard.finishMatch(teams.getLast()[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assertions.fail();
+        }
+        Assertions.assertEquals(myBoard.getNumberRunningGames(), 5);
     }
 
     @Test
