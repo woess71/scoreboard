@@ -10,6 +10,13 @@ public class ScoreBoardTest {
     ScoreBoard myBoard;
     ArrayList<String[]> teams;
 
+    final String SCOREBOARD_DISPLAY = "Celtic 3 - Rangers 0" + "\n" +
+            "Roma 2 - Milano 1" + "\n" +
+            "Barcelona 1 - Napoli 2" + "\n" +
+            "Liverpool 2 - Man Utd. 1" + "\n" +
+            "Dortmund 1 - Paris 0" + "\n" +
+            "Derby 0 - Coventry 1" + "\n" +
+            "Chelsea 0 - Villa 0" + "\n";
 
     @BeforeEach
     void setUp() {
@@ -90,7 +97,29 @@ public class ScoreBoardTest {
 
     @Test
     void testScoreBoardSorting() {
-        // todo
+        try {
+            testAddGames();
+
+            myBoard.updateScore("Liverpool", 0, 1);
+            myBoard.updateScore("Derby", 0, 1);
+            myBoard.updateScore("Barcelona", 0, 1);
+            myBoard.updateScore("Roma", 1, 0);
+            myBoard.updateScore("Dortmund", 1, 0);
+            myBoard.updateScore("Celtic", 1, 0);
+            myBoard.updateScore("Liverpool", 1, 1);
+            myBoard.updateScore("Liverpool", 2, 1);
+            myBoard.updateScore("Barcelona", 1, 1);
+            myBoard.updateScore("Barcelona", 1, 2);
+            myBoard.updateScore("Celtic", 2, 0);
+            myBoard.updateScore("Celtic", 3, 0);
+            myBoard.updateScore("Roma", 1, 1);
+            myBoard.updateScore("Roma", 2, 1);
+            String scoreBoardDisplay =  myBoard.getBoardForDisplay() );
+            Assertions.assertEquals(scoreBoardDisplay, SCOREBOARD_DISPLAY);
+        } catch( Exception e) {
+            e.printStackTrace();
+            Assertions.fail();
+        }
     }
 
 }
